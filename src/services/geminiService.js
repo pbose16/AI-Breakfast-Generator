@@ -1,32 +1,13 @@
-import { MEAL_GENERATOR_PROMPT } from '../prompts';
-import { API_ENDPOINTS } from '../constants/apiConstants';
-
 export const generateMealsFromGemini = async ({ mealType, pastMealsStr, pantryStr, previouslySuggestedStr }) => {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!apiKey) {
-        throw new Error('API key is missing. Please check your .env file or environment variables.');
-    }
-
-    const prompt = MEAL_GENERATOR_PROMPT
-        .replace(/\$\{mealType\}/g, mealType)
-        .replace('${pastMealsStr}', pastMealsStr)
-        .replace('${pantryStr}', pantryStr)
-        .replace('${previouslySuggestedStr}', previouslySuggestedStr);
-
-    const response = await fetch(`${API_ENDPOINTS.GEMINI_GENERATE_CONTENT}?key=${apiKey}`, {
+    const response = await fetch('/.netlify/functions/generateMeals', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: {
-                responseMimeType: "application/json"
-            }
-        })
+        body: JSON.stringify({ mealType, pastMealsStr, pantryStr, previouslySuggestedStr })
     });
 
     if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        throw new Error(errData?.error?.message || 'Failed to generate. Please check your API key.');
+        throw new Error(errData?.error?.message || 'Failed to generate. Please try again.');
     }
 
     const data = await response.json();
