@@ -4,11 +4,11 @@ You are a professional AI Bengali \${mealType} Generator.
 The user has these favorite past \${mealType}s: \${pastMealsStr}.
 The user has these ingredients in their pantry: \${pantryStr}.
 
-Generate exactly 5 authentic Bengali/Indian \${mealType} options the user can make. 
+Generate exactly 10 authentic Bengali/Indian \${mealType} options the user can make. 
 Prioritize using their pantry ingredients and taking inspiration from their past favorite \${mealType}s, but feel free to assume common everyday Indian spices (like turmeric, cumin, mustard oil) are available.
 
 Return ONLY a valid JSON array of objects. Do not use markdown blocks, just raw JSON. Each object must have these exactly:
-- "id": number (1 to 5)
+- "id": number (1 to 10)
 - "title": string (name of dish)
 - "tags": array of 3 strings (e.g. ["Classic", "Spicy", "Quick"])
 - "desc": string (a short, appetizing description)
@@ -37,9 +37,9 @@ Previously Suggested in this Session (DO NOT REPEAT THESE): \${previouslySuggest
 
 Output Format:
 Return ONLY a valid JSON array of objects. Do not use markdown blocks, just raw JSON. Each object must have these exactly:
-- "id": number (1 to 5)
+- "id": number (1 to 10)
 - "title": string (name of dish)
 - "tags": array of 3 strings (e.g. ["Classic", "Spicy", "Quick"])
 - "desc": string (a short, appetizing description)
 
-Generate 5 unique \${mealType} suggestions`;
+Generate 10 unique \${mealType} suggestions`;

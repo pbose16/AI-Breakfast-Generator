@@ -57,7 +57,7 @@ export default function GeneratorDashboard({ ingredients, pastDishes, mealType }
                         <span className="spinner"></span> Generating AI Magic...
                     </>
                 ) : (
-                    `✨ Generate 5 ${mealType.charAt(0).toUpperCase() + mealType.slice(1)} Options ✨`
+                    `✨ Generate ${mealType.charAt(0).toUpperCase() + mealType.slice(1)} Options ✨`
                 )}
             </button>
 
