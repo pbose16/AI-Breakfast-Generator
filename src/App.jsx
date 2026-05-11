@@ -21,11 +21,11 @@ function App() {
   return (
     <div className="container">
       <nav className="navbar">
-        <div className="brand-logo">
-          <span style={{ fontSize: '2rem', marginRight: '6px' }}>🍲</span>
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.1' }}>
-            <span style={{ fontStyle: 'italic', fontWeight: 700 }}>Bengali</span>
-            <span style={{ fontSize: '0.8rem', fontWeight: 500, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}>Breakfast House</span>
+        <div className="brand-logo" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/logo.png" alt="Kha-AI Logo" style={{ height: '45px', width: 'auto', borderRadius: '8px' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: '1.2' }}>
+            <span style={{ fontWeight: 800, fontSize: '1.8rem', letterSpacing: '-1px', color: 'var(--primary)' }}>Kha-AI..</span>
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--text-muted)', opacity: 0.8 }}>AI Bengali Kitchen</span>
           </div>
         </div>
         <div className="nav-links">

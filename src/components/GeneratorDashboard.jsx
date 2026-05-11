@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { generateMealsFromGemini } from '../services/geminiService';
+import { getFallbackMeals } from '../constants/fallbackMeals';
+import ErrorModal from './ErrorModal';
 
 export default function GeneratorDashboard({ ingredients, pastDishes, mealType }) {
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]);
     const [errorMsg, setErrorMsg] = useState('');
     const [previousGenerations, setPreviousGenerations] = useState([]);
+    const [showFallback, setShowFallback] = useState(false);
 
     useEffect(() => {
         setResults([]);
@@ -39,7 +42,10 @@ export default function GeneratorDashboard({ ingredients, pastDishes, mealType }
             setResults(finalOptions);
         } catch (error) {
             console.error('Generation Error:', error);
-            setErrorMsg(error.message || 'An error occurred during generation.');
+            const msg = error.message || 'An error occurred during generation.';
+            setErrorMsg(msg);
+            setResults(getFallbackMeals(mealType, 10));
+            setShowFallback(true);
         } finally {
             setLoading(false);
         }
@@ -54,6 +60,7 @@ export default function GeneratorDashboard({ ingredients, pastDishes, mealType }
             >
                 {loading ? (
                     <>
+
                         <span className="spinner"></span> Generating AI Magic...
                     </>
                 ) : (
@@ -112,6 +119,15 @@ export default function GeneratorDashboard({ ingredients, pastDishes, mealType }
                         </div>
                     ))}
                 </div>
+            )}
+
+            {showFallback && (
+                <ErrorModal 
+                    isOpen={showFallback}
+                    errorMessage={errorMsg}
+                    onClose={() => setShowFallback(false)}
+                    onUseFallback={() => setShowFallback(false)}
+                />
             )}
         </div>
     );
